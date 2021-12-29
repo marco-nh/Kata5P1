@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+
+import java.util.List;
 
 public class Kata5P1 {
 
@@ -55,9 +58,26 @@ public class Kata5P1 {
             System.out.println(e.getMessage());
         }
     }
+    // Método para insertar datos en la tabla direcc_email
+    public static void insert(String email) {
+        String sql = "INSERT INTO EMAIL(Mail) VALUES(?)";
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
        selectAll();
        createNewTable();
+       String email = "email.txt";
+       List<String> lista = MailListReader.read(email);
+       for (String string : lista) {
+           insert(string);
+       }
     }
     
 }
