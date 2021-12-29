@@ -14,7 +14,7 @@ public class Kata5P1 {
 
     private static Connection connect() {
     // SQLite connection string
-        String url = "jdbc:sqlite:Kata5.db";
+        String url = "jdbc:sqlite:KATA5.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
